@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { UserInputComponent } from './user-input/user-input.component';
@@ -20,7 +20,7 @@ import { InvestmentOutput } from './investment-output.model';
 })
 export class AppComponent {
   title = 'profit-calculator';
-  results: InvestmentOutput[] | undefined;
+  results = signal<InvestmentOutput[] | undefined>(undefined);
 
   onCalculateInvestmentResults({
     initialInvestment,
@@ -47,6 +47,6 @@ export class AppComponent {
       });
     }
 
-    this.results = annualData;
+    this.results.set(annualData);
   }
 }
